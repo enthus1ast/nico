@@ -16,6 +16,8 @@ const vSpacing = 2
 const titleBarHeight = 10
 const resizeBarHeight = 3
 const scrollBarWidth = 5
+const minimalWidth = scrollBarWidth + 5
+const minimalHeight = titleBarHeight + 5
 
 type Rect = object
   x,y,w,h: int
@@ -453,13 +455,12 @@ proc guiStartFrame*() =
       else:
         windowData[windowResize].rect.w = mx - windowData[windowResize].rect.x
 
-      if windowData[windowResize].rect.w < 10: # Enforce Minimal width
-        windowData[windowResize].rect.w = 10
-      echo windowData[windowResize].rect.h
+      if windowData[windowResize].rect.w < minimalWidth: # Enforce Minimal width
+        windowData[windowResize].rect.w = minimalWidth
       if windowData[windowResize].open:
         windowData[windowResize].rect.h = my - windowData[windowResize].rect.y
-        if windowData[windowResize].rect.h < 10: # Enforce Minimal height
-          windowData[windowResize].rect.h = 10
+        if windowData[windowResize].rect.h < minimalHeight: # Enforce Minimal height
+          windowData[windowResize].rect.h = minimalHeight
     else:
       windowResize = ""
 
