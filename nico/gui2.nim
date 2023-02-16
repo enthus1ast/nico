@@ -452,8 +452,14 @@ proc guiStartFrame*() =
         windowData[windowResize].rect.w += diff
       else:
         windowData[windowResize].rect.w = mx - windowData[windowResize].rect.x
+
+      if windowData[windowResize].rect.w < 10: # Enforce Minimal width
+        windowData[windowResize].rect.w = 10
+      echo windowData[windowResize].rect.h
       if windowData[windowResize].open:
         windowData[windowResize].rect.h = my - windowData[windowResize].rect.y
+        if windowData[windowResize].rect.h < 10: # Enforce Minimal height
+          windowData[windowResize].rect.h = 10
     else:
       windowResize = ""
 
